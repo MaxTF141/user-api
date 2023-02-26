@@ -10,7 +10,7 @@ const Users =(user) => {
 };
 
 Users.getUsers = (result) => {
-    db.query('SELECT * FROM users', (err, res)=>{
+    db.query('SELECT * FROM users;', (err, res)=>{
         if(err) {
             console.log('err', err);
             result(err, null);
@@ -21,7 +21,7 @@ Users.getUsers = (result) => {
 };
 
 Users.getUsersById = (id, result)=> {
-    db.query('SELECT * FROM users WHERE user_id = ?', [id], (err, res)=> {
+    db.query('SELECT * FROM users WHERE user_id = ?;', [id], (err, res)=> {
         if(err){
             console.log('error', err);
             result(err, null);
@@ -32,7 +32,7 @@ Users.getUsersById = (id, result)=> {
 };
 
 Users.postUser = (newUser, result) => {
-    db.query('INSERT INTO users SET ?', [newUser], (err, res)=>{
+    db.query('INSERT INTO users SET ?;', [newUser], (err, res)=>{
         if(err){
             console.log('error', err);
             result(err, null);
@@ -43,7 +43,7 @@ Users.postUser = (newUser, result) => {
 };
 
 Users.putUser = (id, data,  result) =>{
-    db.query('UPDATE users SET user_name=?, user_surname=?, user_email=?, user_age=?, user_password=? WHERE user_id = ?', [data.user_name, data.user_surname, data.user_email, data.user_age, data.user_password, id], (err, res)=>{
+    db.query('UPDATE users SET user_name=?, user_surname=?, user_email=?, user_age=?, user_password=? WHERE user_id = ?;', [data.user_name, data.user_surname, data.user_email, data.user_age, data.user_password, id], (err, res)=>{
         if(err){
             console.log('err', err);
             result(err, null);
@@ -54,7 +54,7 @@ Users.putUser = (id, data,  result) =>{
 }
 
 Users.deleteAll = (result) => {
-    bd.query('TRUNCATE TABLE users', (err, res)=>{
+    db.query('TRUNCATE TABLE users;', (err, res)=>{
         if(err) {
             console.log('error', err);
             result(err, null);
@@ -65,7 +65,7 @@ Users.deleteAll = (result) => {
 };
 
 Users.deleteById = (id, result) => {
-    db.query('DELETE FORM TABLE users WHERE user_id = ?', [id], (err, res)=>{
+    db.query('DELETE FORM TABLE users WHERE user_id = ?;', [id], (err, res)=>{
         if(err) {
             console.log('error', err);
             result(err, null)

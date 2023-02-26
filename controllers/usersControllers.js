@@ -14,15 +14,16 @@ exports.findUsers = (req, res) =>{
 };
 
 exports.findOneUser = (req, res) => {
-    User.findById(req.params.id, (err, data) => {
+    const id = req.params.id;
+    User.findById(id, (err, data) => {
         if(err){
             if(err.kind === 'not_found') {
                 res.status(400).send({
-                    message: `Not found User with id: ${req.params.id}.`
+                    message: `Not found User with id: ${id}.`
                 });
             } else{
                 res.status(500).send({
-                    message: `Error retrieving User with id: ${req.params.id}.`
+                    message: `Error retrieving User with id: ${id}.`
                 });
             }
         } else {
@@ -45,8 +46,8 @@ exports.createUser = (req, res) => {
         user_age: req.body.user_age, 
         user_password: req.body.user_password, 
         });
-    // Save User in the database and returns the saved data in a callback funtion 
-    Tutorial.postUser(user, (err, data) => {
+    // Save User in the database and returns the saved data in a callback function 
+    User.postUser(user, (err, data) => {
         if(err) {
             res.status(500).send({
                 message: 
@@ -71,11 +72,11 @@ exports.updateUser = (req, res) => {
         if(err) {
             if(err.kind === 'not_found') {
                 res.status(400).send({
-                    message: `Not found user with id:${req.params.id}.`
+                    message: `Not found user with id:${req.body.id}.`
                 });
             } else {
                 res.status(500).send({
-                    message: `Error updating user with id:${req.params.id}.`
+                    message: `Error updating user with id:${req.body.id}.`
                 })
             }
         } else {
@@ -98,7 +99,7 @@ exports.deleteOneUser = (req, res) => {
             }
         } else {
             res.send(data)
-            res.send({ message: `User was delete with id:${req.params.id} was successfully deleted.`})
+            // res.send({ message: `User was delete with id:${req.params.id} was successfully deleted.`})
         }
     });
 };
